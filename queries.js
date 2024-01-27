@@ -59,6 +59,15 @@ async function addEmployee({ firstName, lastName, roleId, managerId }) {
     throw error;
   }
 }
+async function updateEmployeeRole(employeeId, roleId) {
+  try {
+    await pool.execute('UPDATE employee SET role_id = ? WHERE id = ?', [roleId, employeeId]);
+  } catch (error) {
+    console.error('Error updating employee role:', error.message);
+    throw error;
+  }
+}
+
 module.exports = {
   getAllDepartments,
   deleteDepartment,
@@ -66,4 +75,5 @@ module.exports = {
   addRole,
   getAllEmployees,
   addEmployee,
+  updateEmployeeRole,
 };
